@@ -45,10 +45,10 @@ function StatItem({ stat, active }: { stat: Stat; active: boolean }) {
   const count = useCounter(stat.num, 1800, active)
   return (
     <div className="text-center md:text-left">
-      <div className="text-4xl md:text-5xl font-bold text-[var(--color-dark)] tabular-nums">
+      <div className="text-4xl md:text-5xl font-bold text-white tabular-nums">
         {count}{stat.suffix}
       </div>
-      <div className="text-sm text-[var(--color-muted)] mt-1 uppercase tracking-wide">
+      <div className="text-sm text-white/70 mt-1 uppercase tracking-wide">
         {stat.label}
       </div>
     </div>
@@ -90,8 +90,10 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Градиент снизу */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-white to-transparent z-10" />
+      {/* Градиент слева — под заголовок */}
+      <div className="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-white/85 via-white/40 to-transparent z-10" />
+      {/* Градиент снизу — под статистику */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-black/50 to-transparent z-10" />
 
       {/* Основной контент — слева */}
       <Container className="relative z-20 flex-1 flex items-start pt-16 md:pt-24">
