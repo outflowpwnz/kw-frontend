@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Container, Section, MarkerHeading, FadeUp } from '@/components/ui'
+import { Container, Section, MarkerHeading, FadeUp, buttonVariants } from '@/components/ui'
 
 interface Package {
   slug: string
@@ -31,7 +31,7 @@ export function PackagesSection() {
           ПАКЕТЫ УСЛУГ
         </MarkerHeading>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-10">
           {PACKAGES.map((pkg, i) => (
             <FadeUp key={pkg.slug} delay={(i % 4) * 80}>
               <div className="border border-gray-200 p-5 flex flex-col gap-3 hover:border-[var(--color-orange)] transition-colors h-full">
@@ -52,7 +52,7 @@ export function PackagesSection() {
 
         <Link
           href="/anketa"
-          className="inline-flex items-center justify-center font-semibold px-8 py-4 text-base border-2 border-[var(--color-orange)] text-[var(--color-orange)] hover:bg-[var(--color-orange)] hover:text-white transition-all"
+          className={buttonVariants({ variant: 'outline', size: 'lg' })}
         >
           Нужна помощь с выбором пакета
         </Link>

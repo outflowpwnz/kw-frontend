@@ -47,11 +47,13 @@ export function MarkerHeading({
     const el = ref.current
     if (!el) return
 
+    let timeoutId: ReturnType<typeof setTimeout>
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true)
-          setTimeout(() => setMarkerVisible(true), markerDelay)
+          timeoutId = setTimeout(() => setMarkerVisible(true), markerDelay)
           observer.disconnect()
         }
       },
@@ -59,7 +61,10 @@ export function MarkerHeading({
     )
 
     observer.observe(el)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      clearTimeout(timeoutId)
+    }
   }, [markerDelay])
 
   const fadeClasses = cn(

@@ -1,5 +1,4 @@
-import { Header } from '@/components/layout'
-import { Footer } from '@/components/layout'
+import { Header, Footer } from '@/components/layout'
 import {
   HeroSection,
   WeddingCountdownSection,

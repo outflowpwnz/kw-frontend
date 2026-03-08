@@ -2,16 +2,17 @@
 
 /* ===== Brand tokens (Tailwind v4 theme) ===== */
 @theme {
-  /* Colors */
-  --color-brand-orange: #F85919;
-  --color-brand-marker: #D3D761;
-  --color-brand-pink:   #E28EB0;
-  --color-brand-lime:   #CDDC39;
-  --color-brand-dark:   #1A1A2E;
-  --color-brand-muted:  #4A5568;
+  /* Colors — Французский минимализм */
+  --color-brand-orange: #9A7B5A;
+  --color-brand-marker: #D4C4A4;
+  --color-brand-pink:   #E8DDD4;
+  --color-brand-lime:   #D4C4A4;
+  --color-brand-dark:   #1A1714;
+  --color-brand-muted:  #8A8178;
 
-  /* Font family */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Font families — ссылаются на CSS-переменные next/font (инжектируются на <html>) */
+  --font-display: var(--font-cormorant), Georgia, 'Times New Roman', serif;
+  --font-sans:    var(--font-inter), system-ui, -apple-system, sans-serif;
 
   /* Breakpoints */
   --breakpoint-sm: 375px;
@@ -22,26 +23,81 @@
 
 /* ===== CSS custom properties (for use in plain CSS) ===== */
 :root {
-  --color-orange: #F85919;
-  --color-marker: #D3D761;
-  --color-pink:   #E28EB0;
-  --color-lime:   #CDDC39;
-  --color-dark:   #1A1A2E;
-  --color-muted:  #4A5568;
+  --color-orange: #9A7B5A;
+  --color-marker: #D4C4A4;
+  --color-pink:   #E8DDD4;
+  --color-lime:   #D4C4A4;
+  --color-dark:   #1A1714;
+  --color-muted:  #8A8178;
 }
 
 /* ===== Base layer ===== */
 @layer base {
   body {
-    background-color: #ffffff;
+    background-color: #FAF7F4;
     color: var(--color-dark);
     font-family: var(--font-sans);
   }
 
+  /* Cormorant — только для секционных заголовков.
+     h3 и ниже остаются на Inter: мелкий serif хуже читается в карточках */
   h1, h2 {
+    font-family: var(--font-display);
     text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+  }
+
+  /* Карточные заголовки — Inter, чёткий и читаемый на малых размерах */
+  h3, h4, h5, h6 {
+    font-family: var(--font-sans);
     font-weight: 700;
-    letter-spacing: 0.05em;
+  }
+}
+
+/* ===== Stacked sections scroll effect ===== */
+
+/* overflow: clip убирает артефакты у нижнего края, не ломает sticky */
+main {
+  overflow: clip;
+}
+
+/* Sticky стекинг — каждая секция залипает и следующая наезжает сверху */
+main > section {
+  position: sticky;
+  top: 0;
+}
+
+main > section:nth-child(1) { z-index: 1; }
+main > section:nth-child(2) { z-index: 2; }
+main > section:nth-child(3) { z-index: 3; }
+main > section:nth-child(4) { z-index: 4; }
+main > section:nth-child(5) { z-index: 5; }
+main > section:nth-child(6) { z-index: 6; }
+main > section:nth-child(7) { z-index: 7; }
+main > section:nth-child(8) { z-index: 8; }
+main > section:nth-child(9) { z-index: 9; }
+
+/* Тонкая тень между секциями для разделения глубины */
+main > section:not(:first-child) {
+  box-shadow: 0 -4px 24px rgba(42, 32, 40, 0.06);
+}
+
+/* Футер — финальная карточка поверх последней секции */
+main + footer {
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 -4px 24px rgba(42, 32, 40, 0.06);
+}
+
+/* Дефолтные визуальные стили — в @layer base, Tailwind-утилиты их перекрывают */
+@layer base {
+  main > section {
+    background-color: #FAF7F4;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -61,8 +117,8 @@
 
   /* Reviews section — subtle tiled pattern */
   .reviews-pattern-bg {
-    background-color: #fdf8f9;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='32' cy='36' r='10' fill='none' stroke='%231A1A2E' stroke-width='1.2' opacity='0.08'/%3E%3Ccircle cx='44' cy='36' r='10' fill='none' stroke='%231A1A2E' stroke-width='1.2' opacity='0.08'/%3E%3Cpath d='M88 90c0-4-3.2-7-7-7s-7 3-7 7c0 6 7 11 7 11s7-5 7-11z' fill='none' stroke='%231A1A2E' stroke-width='1.2' opacity='0.07'/%3E%3C/svg%3E");
+    background-color: #F5F0EA;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='32' cy='36' r='10' fill='none' stroke='%232A2028' stroke-width='1.2' opacity='0.08'/%3E%3Ccircle cx='44' cy='36' r='10' fill='none' stroke='%232A2028' stroke-width='1.2' opacity='0.08'/%3E%3Cpath d='M88 90c0-4-3.2-7-7-7s-7 3-7 7c0 6 7 11 7 11s7-5 7-11z' fill='none' stroke='%232A2028' stroke-width='1.2' opacity='0.07'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 120px 120px;
   }

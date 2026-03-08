@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Container, MarkerHeading } from '@/components/ui'
+import { Container, MarkerHeading, buttonVariants } from '@/components/ui'
 
 interface Stat {
   num: number
@@ -23,18 +23,19 @@ function useCounter(target: number, duration: number, active: boolean) {
   useEffect(() => {
     if (!active) return
 
+    let rafId: number
     const startTime = performance.now()
 
     const tick = (now: number) => {
       const elapsed = now - startTime
       const progress = Math.min(elapsed / duration, 1)
-      // ease-out cubic
       const eased = 1 - Math.pow(1 - progress, 3)
       setValue(Math.round(eased * target))
-      if (progress < 1) requestAnimationFrame(tick)
+      if (progress < 1) rafId = requestAnimationFrame(tick)
     }
 
-    requestAnimationFrame(tick)
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
   }, [active, target, duration])
 
   return value
@@ -105,7 +106,7 @@ export function HeroSection() {
           </MarkerHeading>
           <Link
             href="/anketa"
-            className="inline-flex items-center justify-center font-semibold px-8 py-4 text-lg bg-[var(--color-orange)] text-white hover:opacity-90 transition-opacity"
+            className={buttonVariants({ variant: 'primary', size: 'lg' })}
           >
             Заполнить анкету
           </Link>

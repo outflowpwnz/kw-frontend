@@ -30,7 +30,7 @@ const STEPS: Step[] = [
 
 export function ProcessSection() {
   return (
-    <Section id="process" className="bg-gray-50">
+    <Section id="process" className="bg-[var(--color-pink)]">
       <Container>
         <MarkerHeading
           as="h2"
@@ -43,9 +43,9 @@ export function ProcessSection() {
 
         <div className="flex flex-col md:flex-row gap-6 md:gap-4">
           {STEPS.map((step, i) => (
-            <FadeUp key={i} delay={i * 100} className="flex-1">
+            <FadeUp key={step.title} delay={i * 100} className="flex-1">
               <div className="flex flex-col md:items-start gap-3 h-full">
-                <span className="text-2xl font-bold" style={{ color: 'var(--color-orange)' }}>
+                <span className="text-2xl font-bold text-[var(--color-orange)]">
                   ({i + 1})
                 </span>
                 <div className="hidden md:block w-full h-px bg-gray-300 my-1" />

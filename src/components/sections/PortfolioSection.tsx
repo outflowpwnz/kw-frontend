@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Container, Section, MarkerHeading } from '@/components/ui'
+import { Container, Section, MarkerHeading, buttonVariants } from '@/components/ui'
 import { cn } from '@/lib/utils'
 
 interface Case {
@@ -107,7 +107,7 @@ export function PortfolioSection() {
 
         <Link
           href="/anketa"
-          className="inline-flex items-center justify-center font-semibold px-8 py-4 text-lg bg-[var(--color-orange)] text-white hover:opacity-90 transition-opacity"
+          className={buttonVariants({ variant: 'primary', size: 'lg' })}
         >
           Хочу уникальную свадьбу
         </Link>

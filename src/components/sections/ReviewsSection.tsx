@@ -22,16 +22,10 @@ export function ReviewsSection() {
 
         <div className="relative min-h-[400px] md:min-h-[320px]">
           {REVIEWS.map((review, i) => (
-            <FadeUp key={i} delay={i * 200} className={`absolute max-w-xs ${review.position}`}>
-              <div
-                className="p-4 rounded-2xl shadow-lg text-sm text-[var(--color-dark)] font-medium relative"
-                style={{ backgroundColor: 'var(--color-pink)' }}
-              >
+            <FadeUp key={review.text} delay={i * 200} className={`absolute max-w-xs ${review.position}`}>
+              <div className="p-4 shadow-lg text-sm text-[var(--color-dark)] font-medium relative bg-[var(--color-pink)]">
                 <p>{review.text}</p>
-                <div
-                  className="absolute -bottom-2 left-6 w-4 h-4 rotate-45"
-                  style={{ backgroundColor: 'var(--color-pink)' }}
-                />
+                <div className="absolute -bottom-2 left-6 w-4 h-4 rotate-45 bg-[var(--color-pink)]" />
               </div>
             </FadeUp>
           ))}

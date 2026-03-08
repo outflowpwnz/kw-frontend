@@ -1,9 +1,21 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Cormorant_Garamond, Inter } from 'next/font/google'
 import './globals.css'
-import { CustomCursor } from '@/components/ui'
+import { CustomCursor, StickyStackController } from '@/components/ui'
 
-const inter = Inter({ subsets: ['latin', 'cyrillic'] })
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['300', '400', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Ателье событий Екатерины Карпенко',
@@ -16,9 +28,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ru">
-      <body className={inter.className}>
+    <html lang="ru" className={`${cormorant.variable} ${inter.variable}`}>
+      <body>
         <CustomCursor />
+        <StickyStackController />
         {children}
       </body>
     </html>

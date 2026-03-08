@@ -35,12 +35,13 @@ export function FaqSection() {
 
         <div className="flex flex-col divide-y divide-gray-200">
           {FAQ_ITEMS.map((item, i) => (
-            <FadeUp key={i} delay={i * 80}>
+            <FadeUp key={item.q} delay={i * 80}>
               <div className={cn('transition-colors', openIndex === i ? 'bg-gray-50' : '')}>
                 <button
                   className="w-full flex items-center justify-between py-5 px-2 text-left gap-4"
                   onClick={() => toggle(i)}
                   aria-expanded={openIndex === i}
+                  aria-controls={`faq-answer-${i}`}
                 >
                   <span className="font-semibold text-[var(--color-dark)] text-base md:text-lg">
                     {item.q}
@@ -55,7 +56,7 @@ export function FaqSection() {
                   </span>
                 </button>
                 {openIndex === i && (
-                  <div className="px-2 pb-5 text-[var(--color-muted)] leading-relaxed">
+                  <div id={`faq-answer-${i}`} className="px-2 pb-5 text-[var(--color-muted)] leading-relaxed">
                     {item.a}
                   </div>
                 )}

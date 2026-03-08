@@ -17,10 +17,12 @@ export function FadeUp({ children, className, delay = 0 }: FadeUpProps) {
     const el = ref.current
     if (!el) return
 
+    let timeoutId: ReturnType<typeof setTimeout>
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => setInView(true), delay)
+          timeoutId = setTimeout(() => setInView(true), delay)
           observer.disconnect()
         }
       },
@@ -28,7 +30,10 @@ export function FadeUp({ children, className, delay = 0 }: FadeUpProps) {
     )
 
     observer.observe(el)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      clearTimeout(timeoutId)
+    }
   }, [delay])
 
   return (

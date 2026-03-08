@@ -23,7 +23,7 @@ export function AboutSection() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {TEAM.map((member, i) => (
-            <FadeUp key={i} delay={i * 100}>
+            <FadeUp key={member.name} delay={i * 100}>
               <div className="flex flex-col">
                 <div className="relative aspect-[3/4] mb-4 overflow-hidden">
                   <Image
