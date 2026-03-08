@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
+/* ===== Brand tokens (Tailwind v4 theme) ===== */
+@theme {
+  /* Colors */
+  --color-brand-orange: #F85919;
+  --color-brand-marker: #D3D761;
+  --color-brand-pink:   #E28EB0;
+  --color-brand-lime:   #CDDC39;
+  --color-brand-dark:   #1A1A2E;
+  --color-brand-muted:  #4A5568;
+
+  /* Font family */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Breakpoints */
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 768px;
+  --breakpoint-nav: 1024px;
+  --breakpoint-lg: 1440px;
+}
+
+/* ===== CSS custom properties (for use in plain CSS) ===== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-orange: #F85919;
+  --color-marker: #D3D761;
+  --color-pink:   #E28EB0;
+  --color-lime:   #CDDC39;
+  --color-dark:   #1A1A2E;
+  --color-muted:  #4A5568;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ===== Base layer ===== */
+@layer base {
+  body {
+    background-color: #ffffff;
+    color: var(--color-dark);
+    font-family: var(--font-sans);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  h1, h2 {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ===== Component layer ===== */
+@layer components {
+  /* Marker highlight effect for headings */
+  .marker-highlight {
+    background: linear-gradient(var(--color-marker), var(--color-marker)) no-repeat left center;
+    background-size: 0% 80%;
+    padding: 0 4px;
+    transition: background-size 0.6s ease;
+  }
+
+  .marker-highlight.is-visible {
+    background-size: 100% 80%;
+  }
 }
