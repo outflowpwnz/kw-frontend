@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* ===== Brand tokens (Tailwind v4 theme) ===== */
 @theme {
@@ -31,8 +32,13 @@
   --color-muted:  #8A8178;
 }
 
+
 /* ===== Base layer ===== */
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: #FAF7F4;
     color: var(--color-dark);

@@ -12,7 +12,7 @@ export function Section({
   ...props
 }: SectionProps) {
   return (
-    <Tag className={cn('py-16 md:py-24', className)} {...props}>
+    <Tag className={cn('py-16 md:py-24 scroll-mt-16 nav:scroll-mt-20', className)} {...props}>
       {children}
     </Tag>
   )

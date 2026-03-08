@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
-import { Container, buttonVariants, SocialIcon } from '@/components/ui'
+import { Container, buttonVariants, SocialIcon, AnchorLink } from '@/components/ui'
 import { cn } from '@/lib/utils'
 
 const NAV_ITEMS = [
@@ -46,13 +46,13 @@ export function Header() {
             {/* Навигация — desktop */}
             <nav className="hidden nav:flex items-center gap-8">
               {NAV_ITEMS.map((item) => (
-                <Link
+                <AnchorLink
                   key={item.href}
                   href={item.href}
                   className="text-sm text-[var(--color-dark)] hover:text-[var(--color-orange)] transition-colors"
                 >
                   {item.label}
-                </Link>
+                </AnchorLink>
               ))}
             </nav>
 
@@ -129,7 +129,7 @@ export function Header() {
             {/* Пункты навигации */}
             <nav className="flex flex-col px-6 pt-8 gap-6 overflow-y-auto flex-1">
               {NAV_ITEMS.map((item, i) => (
-                <Link
+                <AnchorLink
                   key={item.href}
                   href={item.href}
                   onClick={close}
@@ -141,7 +141,7 @@ export function Header() {
                   style={{ transitionDelay: menuOpen ? `${i * 60 + 120}ms` : '0ms' }}
                 >
                   {item.label}
-                </Link>
+                </AnchorLink>
               ))}
             </nav>
 

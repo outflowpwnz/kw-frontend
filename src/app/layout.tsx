@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Cormorant_Garamond, Inter } from 'next/font/google'
 import './globals.css'
-import { CustomCursor, StickyStackController } from '@/components/ui'
+import { CustomCursor, StickyStackController, ToastContainer } from '@/components/ui'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin', 'cyrillic'],
@@ -33,6 +33,7 @@ export default function RootLayout({
         <CustomCursor />
         <StickyStackController />
         {children}
+        <ToastContainer />
       </body>
     </html>
   )

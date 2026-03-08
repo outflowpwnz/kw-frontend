@@ -13,7 +13,7 @@ interface Stat {
 const STATS: Stat[] = [
   { num: 11,  suffix: '',  label: 'лет опыта' },
   { num: 200, suffix: '+', label: 'свадеб' },
-  { num: 3,   suffix: '',  label: 'организатора' },
+  { num: 4,   suffix: '',  label: 'организатора' },
   { num: 5,   suffix: '★', label: 'средний рейтинг' },
 ]
 

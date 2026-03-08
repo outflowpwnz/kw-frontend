@@ -1,5 +1,7 @@
 'use client'
 import { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import { getHeaderHeight } from '@/lib/constants'
 
 /**
  * Контроллер эффекта stacked sections.
@@ -14,6 +16,41 @@ import { useEffect } from 'react'
  * - SSR — компонент 'use client', запускается только в браузере
  */
 export function StickyStackController() {
+  const pathname = usePathname()
+
+  // Скролл к якорю при навигации на '/' с другой страницы.
+  // Отдельный эффект с [pathname] — перезапускается при каждом переходе,
+  // в отличие от основного эффекта sticky-контроллера (зависимость []).
+  useEffect(() => {
+    if (pathname !== '/') return
+
+    const scrollToHash = () => {
+      const hash = window.location.hash.slice(1)
+      if (!hash) return
+
+      const main = document.querySelector<HTMLElement>('main')
+      if (!main) return
+
+      const sections = Array.from(main.querySelectorAll<HTMLElement>(':scope > section'))
+      const el = document.getElementById(hash)
+      if (!el) return
+
+      const mainTop = main.getBoundingClientRect().top + window.scrollY
+      let accumulated = 0
+      for (const section of sections) {
+        if (section === el || section.contains(el)) break
+        accumulated += section.offsetHeight
+      }
+
+      window.scrollTo({ top: mainTop + accumulated - getHeaderHeight(), behavior: 'smooth' })
+    }
+
+    // setTimeout даёт React время отрендерить секции перед подсчётом высот
+    const t = setTimeout(scrollToHash, 100)
+    return () => clearTimeout(t)
+  }, [pathname])
+
+  // Основной sticky-контроллер — запускается один раз при маунте layout'а
   useEffect(() => {
     const main = document.querySelector<HTMLElement>('main')
     if (!main) return

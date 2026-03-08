@@ -6,6 +6,7 @@ export function CustomCursor() {
   const pos = useRef({ x: -100, y: -100 })
   const current = useRef({ x: -100, y: -100 })
   const rafRef = useRef<number | undefined>(undefined)
+  const isAnimating = useRef(false)
 
   useEffect(() => {
     // Отключаем на тач-устройствах
@@ -14,27 +15,40 @@ export function CustomCursor() {
     const el = cursorRef.current
     if (!el) return
 
-    const onMove = (e: MouseEvent) => {
-      pos.current = { x: e.clientX, y: e.clientY }
-      el.style.opacity = '1'
-    }
-
-    const onLeave = () => {
-      el.style.opacity = '0'
-    }
-
     const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 
     const animate = () => {
       current.current.x = lerp(current.current.x, pos.current.x, 0.1)
       current.current.y = lerp(current.current.y, pos.current.y, 0.1)
       el.style.transform = `translate(${current.current.x - 20}px, ${current.current.y - 20}px)`
-      rafRef.current = requestAnimationFrame(animate)
+
+      // Останавливаем rAF когда курсор достиг цели — экономим CPU в idle
+      const dx = Math.abs(current.current.x - pos.current.x)
+      const dy = Math.abs(current.current.y - pos.current.y)
+      if (dx > 0.1 || dy > 0.1) {
+        rafRef.current = requestAnimationFrame(animate)
+      } else {
+        isAnimating.current = false
+        rafRef.current = undefined
+      }
+    }
+
+    const onMove = (e: MouseEvent) => {
+      pos.current = { x: e.clientX, y: e.clientY }
+      el.style.opacity = '1'
+      // Запускаем loop только если он не запущен
+      if (!isAnimating.current) {
+        isAnimating.current = true
+        rafRef.current = requestAnimationFrame(animate)
+      }
+    }
+
+    const onLeave = () => {
+      el.style.opacity = '0'
     }
 
     document.addEventListener('mousemove', onMove)
     document.addEventListener('mouseleave', onLeave)
-    rafRef.current = requestAnimationFrame(animate)
 
     return () => {
       document.removeEventListener('mousemove', onMove)

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 460" fill="none">
+
+  <g stroke="#1A1714" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- PROTEA — flower center at (200,155) -->
+    <g transform="translate(200,155)">
+
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(0)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(30)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(60)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(90)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(120)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(150)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(180)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(210)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(240)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(270)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(300)"/>
+      <path d="M-5,14 C-8,2 -6,-36 0,-70 C6,-36 8,2 5,14 Z" stroke-width="1.1" transform="rotate(330)"/>
+
+      <circle cx="0" cy="0" r="34" stroke-width="1.3"/>
+
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(0)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(20)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(40)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(60)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(80)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(100)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(120)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(140)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(160)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(180)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(200)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(220)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(240)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(260)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(280)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(300)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(320)"/>
+      <line x1="0" y1="-21" x2="0" y2="-32" stroke-width="0.65" transform="rotate(340)"/>
+
+      <circle cx="0" cy="0" r="19" stroke-width="1"/>
+      <circle cx="0" cy="0" r="2.5" fill="#1A1714" stroke="none"/>
+    </g>
+
+    <!-- STEM -->
+    <path d="M200,189 C200,232 199,285 197,348" stroke-width="1.3"/>
+
+    <!-- Leaf left -->
+    <path d="M199,278 C186,259 169,245 158,239 C165,244 179,257 199,278 Z" stroke-width="1"/>
+
+    <!-- Leaf right -->
+    <path d="M198,314 C212,296 228,286 236,282 C230,287 217,297 198,314 Z" stroke-width="1"/>
+
+    <!-- Thin horizontal rule under flower -->
+    <line x1="148" y1="210" x2="252" y2="210" stroke-width="0.8"/>
+
+  </g>
+
+  <!-- КВ MONOGRAM — под цветком, без рамки -->
+  <text
+    x="176" y="310"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="62" font-weight="400"
+    fill="#1A1714"
+  >К</text>
+  <text
+    x="210" y="322"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="62" font-weight="400"
+    fill="#1A1714"
+  >В</text>
+
+  <!-- Подпись -->
+  <text
+    x="200" y="410"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="11" font-weight="400" letter-spacing="5"
+    text-anchor="middle"
+    fill="#9A7B5A"
+  >KARPENKO WEDDING</text>
+
+</svg>

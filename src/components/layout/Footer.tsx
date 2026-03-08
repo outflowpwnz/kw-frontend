@@ -1,5 +1,6 @@
+'use client'
 import Link from 'next/link'
-import { Container, SocialIcon } from '@/components/ui'
+import { Container, SocialIcon, AnchorLink } from '@/components/ui'
 
 const CURRENT_YEAR = new Date().getFullYear()
 
@@ -33,13 +34,13 @@ export function Footer() {
           {/* Навигация */}
           <nav className="flex flex-col gap-3">
             {NAV_LINKS.map((link) => (
-              <Link
+              <AnchorLink
                 key={link.href}
                 href={link.href}
                 className="text-sm text-[var(--color-dark)] hover:text-[var(--color-orange)] transition-colors"
               >
                 {link.label}
-              </Link>
+              </AnchorLink>
             ))}
             <Link
               href="/privacy"
