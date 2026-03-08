@@ -2,6 +2,7 @@ import { Header } from '@/components/layout'
 import { Footer } from '@/components/layout'
 import {
   HeroSection,
+  WeddingCountdownSection,
   AboutSection,
   ReviewsSection,
   PortfolioSection,
@@ -17,6 +18,7 @@ export default function HomePage() {
       <Header />
       <main className="pt-0">
         <HeroSection />
+        <WeddingCountdownSection />
         <AboutSection />
         <ReviewsSection />
         <PortfolioSection />

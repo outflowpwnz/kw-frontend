@@ -98,7 +98,7 @@ export function HeroSection() {
           <MarkerHeading
             as="h1"
             className="text-4xl md:text-5xl lg:text-6xl mb-8 leading-tight"
-            highlight={['ВАШ СВАДЕБНЫЙ ДЕНЬ']}
+            highlight={['ПОМОГАЕМ ВОПЛОТИТЬ В ЖИЗНЬ ВАШ СВАДЕБНЫЙ ДЕНЬ']}
             markerDelay={700}
           >
             ПОМОГАЕМ ВОПЛОТИТЬ В ЖИЗНЬ ВАШ СВАДЕБНЫЙ ДЕНЬ

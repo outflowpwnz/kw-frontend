@@ -34,7 +34,11 @@ export function AboutSection() {
                   />
                 </div>
                 <p className="font-bold text-[var(--color-dark)] text-sm md:text-base">{member.name}</p>
-                <p className="text-[var(--color-muted)] text-sm mt-1">{member.role}</p>
+                <p className="text-sm mt-1">
+                  <mark className="marker-highlight is-visible bg-transparent text-[var(--color-dark)]">
+                    {member.role}
+                  </mark>
+                </p>
               </div>
             </FadeUp>
           ))}

@@ -9,7 +9,7 @@ const REVIEWS = [
 
 export function ReviewsSection() {
   return (
-    <Section className="bg-gray-50">
+    <Section className="reviews-pattern-bg">
       <Container>
         <MarkerHeading
           as="h2"
