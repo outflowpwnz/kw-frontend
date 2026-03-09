@@ -1,6 +1,6 @@
-'use client'
 import Link from 'next/link'
 import { Container, SocialIcon, AnchorLink } from '@/components/ui'
+import type { SiteSettings } from '@/lib/api'
 
 const CURRENT_YEAR = new Date().getFullYear()
 
@@ -11,7 +11,15 @@ const NAV_LINKS = [
   { label: 'Контакты', href: '/#contacts' },
 ]
 
-export function Footer() {
+interface Props {
+  settings: SiteSettings
+}
+
+export function Footer({ settings }: Props) {
+  const phone = settings.phone ?? '+7 (000) 000-00-00'
+  const instagramUrl = settings.instagram_url ?? '#'
+  const telegramUrl = settings.telegram_url ?? '#'
+
   return (
     <footer className="bg-[var(--color-pink)]">
       <Container>
@@ -20,15 +28,12 @@ export function Footer() {
           <div>
             <Link href="/" className="flex flex-col leading-tight mb-4">
               <span className="font-bold text-2xl text-[var(--color-dark)] uppercase tracking-widest">
-                KARPENKO
+                KARPENKO WEDDING
               </span>
-              <span className="text-xs text-[var(--color-muted)] tracking-[0.2em] uppercase">
-                Wedding Agency
+              <span className="text-xs text-[var(--color-muted)] tracking-[0.15em]">
+                Ателье событий Екатерины Карпенко
               </span>
             </Link>
-            <p className="text-sm text-[var(--color-muted)]">
-              Ателье событий Екатерины Карпенко
-            </p>
           </div>
 
           {/* Навигация */}
@@ -53,14 +58,14 @@ export function Footer() {
           {/* Контакты + соцсети */}
           <div className="flex flex-col gap-3">
             <a
-              href="tel:+70000000000"
+              href={`tel:${phone.replace(/\s/g, '')}`}
               className="text-sm font-semibold text-[var(--color-dark)] hover:text-[var(--color-orange)] transition-colors"
             >
-              +7 (000) 000-00-00
+              {phone}
             </a>
             <div className="flex gap-4 mt-1">
-              <SocialIcon type="instagram" href="#" />
-              <SocialIcon type="telegram" href="#" />
+              <SocialIcon type="instagram" href={instagramUrl} />
+              <SocialIcon type="telegram" href={telegramUrl} />
             </div>
           </div>
         </div>

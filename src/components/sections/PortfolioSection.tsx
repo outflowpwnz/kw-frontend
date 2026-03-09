@@ -4,36 +4,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Container, Section, MarkerHeading, buttonVariants } from '@/components/ui'
 import { cn } from '@/lib/utils'
+import { resolveMediaUrl } from '@/lib/api'
+import type { PortfolioCase } from '@/lib/api'
 
-interface Case {
-  title: string
-  description: string
-  photo: string
+interface Props {
+  cases: PortfolioCase[]
 }
 
-const CASES: Case[] = [
-  {
-    title: 'Свадьба Фа и Кирилла',
-    description: 'Камерная свадьба в загородном доме с живой музыкой и авторской флористикой в стиле "сад-огород".',
-    photo: '/images/wedding-days/wedding-day-2024-fa-kirill.jpg',
-  },
-  {
-    title: 'Свадьба Игоря и Анастасии',
-    description: 'Роскошное торжество в банкетном зале с кастомным декором в лилово-золотой палитре.',
-    photo: '/images/wedding-days/wedding-day-2025-igor-anastasiya.jpg',
-  },
-  {
-    title: 'Свадьба Юлии и Артёма',
-    description: 'Выездная церемония на берегу озера с чаепитием вместо фуршета.',
-    photo: '/images/wedding-days/wedding-day-2025-yulia-artem.jpg',
-  },
-]
-
-export function PortfolioSection() {
+export function PortfolioSection({ cases }: Props) {
   const [active, setActive] = useState(0)
 
-  const prev = () => setActive((i) => (i - 1 + CASES.length) % CASES.length)
-  const next = () => setActive((i) => (i + 1) % CASES.length)
+  const prev = () => setActive((i) => (i - 1 + cases.length) % cases.length)
+  const next = () => setActive((i) => (i + 1) % cases.length)
+
+  if (!cases.length) return null
+
+  const current = cases[active]
 
   return (
     <Section id="portfolio">
@@ -49,9 +35,9 @@ export function PortfolioSection() {
 
         {/* Миниатюры-навигация */}
         <div className="flex gap-3 mb-8">
-          {CASES.map((c, i) => (
+          {cases.map((c, i) => (
             <button
-              key={i}
+              key={c.id}
               onClick={() => setActive(i)}
               className={cn(
                 'w-14 h-14 rounded-full overflow-hidden flex-shrink-0 transition-all duration-200 relative',
@@ -61,28 +47,33 @@ export function PortfolioSection() {
               )}
               aria-label={c.title}
             >
-              <Image src={c.photo} alt={c.title} fill className="object-cover" />
+              <Image
+                src={resolveMediaUrl(c.photoUrl)}
+                alt={c.title}
+                fill
+                className="object-cover"
+                unoptimized
+              />
             </button>
           ))}
         </div>
 
         {/* Слайд */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
-          {/* Текст */}
           <div>
             <h3 className="text-2xl font-bold uppercase text-[var(--color-dark)] mb-4">
-              {CASES[active].title}
+              {current.title}
             </h3>
-            <p className="text-[var(--color-muted)] leading-relaxed">{CASES[active].description}</p>
+            <p className="text-[var(--color-muted)] leading-relaxed">{current.description}</p>
           </div>
-          {/* Фото */}
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
-              key={active}
-              src={CASES[active].photo}
-              alt={CASES[active].title}
+              key={current.id}
+              src={resolveMediaUrl(current.photoUrl)}
+              alt={current.title}
               fill
               className="object-cover"
+              unoptimized
             />
           </div>
         </div>

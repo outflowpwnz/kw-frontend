@@ -1,16 +1,23 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container, Section, MarkerHeading, FadeUp, buttonVariants, SocialIcon } from '@/components/ui'
+import type { SiteSettings } from '@/lib/api'
 
-export function ContactsSection() {
+interface Props {
+  settings: SiteSettings
+}
+
+export function ContactsSection({ settings }: Props) {
+  const phone = settings.phone ?? '+7 (000) 000-00-00'
+  const instagramUrl = settings.instagram_url ?? '#'
+  const telegramUrl = settings.telegram_url ?? '#'
+
   return (
     <Section id="contacts" className="bg-[var(--color-dark)]">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:items-stretch">
 
-          {/* Левый блок — заголовок сверху, цитата, контакты снизу */}
           <FadeUp delay={0} className="flex flex-col justify-between gap-12">
-
             <MarkerHeading
               as="h2"
               className="text-3xl md:text-4xl lg:text-5xl text-white"
@@ -20,7 +27,6 @@ export function ContactsSection() {
               КАК С НАМИ СВЯЗАТЬСЯ
             </MarkerHeading>
 
-            {/* Декоративная цитата */}
             <blockquote className="relative">
               <span className="absolute -top-8 -left-2 text-9xl leading-none text-[var(--color-orange)] font-serif select-none pointer-events-none">
                 &ldquo;
@@ -33,44 +39,39 @@ export function ContactsSection() {
               </footer>
             </blockquote>
 
-            {/* Контакты */}
             <div className="flex flex-col gap-5">
               <div className="flex gap-3">
                 <SocialIcon
                   type="instagram"
-                  href="#"
+                  href={instagramUrl}
                   size={18}
                   className="w-10 h-10 border border-white/30 text-white flex items-center justify-center hover:bg-[var(--color-orange)] hover:border-[var(--color-orange)] transition-all"
                 />
                 <SocialIcon
                   type="telegram"
-                  href="#"
+                  href={telegramUrl}
                   size={18}
                   className="w-10 h-10 border border-white/30 text-white flex items-center justify-center hover:bg-[var(--color-orange)] hover:border-[var(--color-orange)] transition-all"
                 />
               </div>
 
               <a
-                href="tel:+70000000000"
+                href={`tel:${phone.replace(/\s/g, '')}`}
                 className="text-2xl font-bold text-white hover:text-[var(--color-orange)] transition-colors"
               >
-                +7 (000) 000-00-00
+                {phone}
               </a>
 
               <p className="text-white/50 text-sm">
                 Или заполните анкету — мы свяжемся с вами в ближайшее время.
               </p>
 
-              <Link
-                href="/anketa"
-                className={buttonVariants({ variant: 'light', size: 'md' })}
-              >
+              <Link href="/anketa" className={buttonVariants({ variant: 'light', size: 'md' })}>
                 Заполнить анкету
               </Link>
             </div>
           </FadeUp>
 
-          {/* Правый блок — фото */}
           <FadeUp delay={200}>
             <div className="relative aspect-[1] overflow-hidden">
               <Image

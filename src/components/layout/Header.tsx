@@ -36,10 +36,10 @@ export function Header() {
             {/* Логотип */}
             <Link href="/" className="flex flex-col leading-tight">
               <span className="font-bold text-xl text-[var(--color-dark)] uppercase tracking-widest">
-                KARPENKO
+                KARPENKO WEDDING
               </span>
-              <span className="text-xs text-[var(--color-muted)] tracking-[0.2em] uppercase">
-                Wedding Agency
+              <span className="text-xs text-[var(--color-muted)] tracking-[0.15em]">
+                Ателье событий Екатерины Карпенко
               </span>
             </Link>
 

@@ -1,14 +1,13 @@
 import Image from 'next/image'
 import { Container, Section, MarkerHeading, FadeUp } from '@/components/ui'
+import { resolveMediaUrl } from '@/lib/api'
+import type { TeamMember } from '@/lib/api'
 
-const TEAM = [
-  { name: 'Екатерина Карпенко', role: 'Основатель & ведущий организатор', photo: '/images/wedding-planners/wedding-planner-ekaterina.jpg' },
-  { name: 'Александра',         role: 'Организатор',                       photo: '/images/wedding-planners/wedding-planner-alexandra.jpg' },
-  { name: 'Алина',              role: 'Организатор',                       photo: '/images/wedding-planners/wedding-planner-alina.jpg' },
-  { name: 'Мария',              role: 'Координатор',                       photo: '/images/wedding-planners/wedding-planner-maria.jpg' },
-]
+interface Props {
+  team: TeamMember[]
+}
 
-export function AboutSection() {
+export function AboutSection({ team }: Props) {
   return (
     <Section id="about">
       <Container>
@@ -22,21 +21,22 @@ export function AboutSection() {
         </MarkerHeading>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {TEAM.map((member, i) => (
-            <FadeUp key={member.name} delay={i * 100}>
+          {team.map((member, i) => (
+            <FadeUp key={member.id} delay={i * 100}>
               <div className="flex flex-col">
                 <div className="relative aspect-[3/4] mb-4 overflow-hidden">
                   <Image
-                    src={member.photo}
+                    src={resolveMediaUrl(member.photoUrl)}
                     alt={member.name}
                     fill
                     className="object-cover object-top"
+                    unoptimized
                   />
                 </div>
                 <p className="font-bold text-[var(--color-dark)] text-sm md:text-base">{member.name}</p>
                 <p className="text-sm mt-1">
                   <mark className="marker-highlight is-visible bg-transparent text-[var(--color-dark)]">
-                    {member.role}
+                    {member.description}
                   </mark>
                 </p>
               </div>

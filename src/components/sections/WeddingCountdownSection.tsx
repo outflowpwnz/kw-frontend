@@ -1,18 +1,13 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Container, Section, MarkerHeading, FadeUp } from '@/components/ui'
+import type { SiteSettings } from '@/lib/api'
 
-// Конфиг — пока хардкод, потом переедет в бэк
-export const WEDDING_CONFIG = {
-  nextWeddingDate: new Date('2026-04-05T14:00:00'),
-  totalWeddings: 200,
-}
-
-function useCountdown(target: Date) {
-  // null = ещё не инициализировано (SSR), 0 = дата в прошлом
+function useCountdown(target: Date | null) {
   const [diff, setDiff] = useState<number | null>(null)
 
   useEffect(() => {
+    if (!target) return
     const update = () => setDiff(Math.max(0, target.getTime() - Date.now()))
     update()
     const id = setInterval(update, 1000)
@@ -20,36 +15,44 @@ function useCountdown(target: Date) {
   }, [target])
 
   const totalSeconds = Math.floor((diff ?? 0) / 1000)
-  const days = Math.floor(totalSeconds / 86400)
-  const hours = Math.floor((totalSeconds % 86400) / 3600)
+  const days    = Math.floor(totalSeconds / 86400)
+  const hours   = Math.floor((totalSeconds % 86400) / 3600)
   const minutes = Math.floor((totalSeconds % 3600) / 60)
   const seconds = totalSeconds % 60
-  const isPast = diff === 0
+  const isPast  = diff === 0
 
   return { days, hours, minutes, seconds, isPast, ready: diff !== null }
 }
 
-function pad(n: number) {
-  return String(n).padStart(2, '0')
-}
+function pad(n: number) { return String(n).padStart(2, '0') }
 
-/** Склонение числительного по трём формам (1 день / 2 дня / 5 дней) */
-function pluralize(n: number, one: string, few: string, many: string): string {
-  const mod10 = n % 10
-  const mod100 = n % 100
-  if (mod10 === 1 && mod100 !== 11) return one
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return few
+function pluralize(n: number, one: string, few: string, many: string) {
+  const m = n % 10, c = n % 100
+  if (m === 1 && c !== 11) return one
+  if (m >= 2 && m <= 4 && (c < 10 || c >= 20)) return few
   return many
 }
 
-export function WeddingCountdownSection() {
-  const { days, hours, minutes, seconds, isPast, ready } = useCountdown(WEDDING_CONFIG.nextWeddingDate)
+interface Props {
+  settings: SiteSettings
+}
+
+export function WeddingCountdownSection({ settings }: Props) {
+  const weddingDate = useMemo(
+    () => settings.countdown_next_wedding_date
+      ? new Date(settings.countdown_next_wedding_date)
+      : null,
+    [settings.countdown_next_wedding_date]
+  )
+  const totalWeddings = settings.countdown_total_weddings ?? '200'
+
+  const { days, hours, minutes, seconds, isPast, ready } = useCountdown(weddingDate)
 
   const units = [
-    { value: days,    label: pluralize(days,    'день',   'дня',    'дней')    },
-    { value: hours,   label: pluralize(hours,   'час',    'часа',   'часов')   },
-    { value: minutes, label: pluralize(minutes, 'минута', 'минуты', 'минут')   },
-    { value: seconds, label: pluralize(seconds, 'секунда','секунды','секунд')  },
+    { id: 'days',    value: days,    label: pluralize(days,    'день',   'дня',    'дней')    },
+    { id: 'hours',   value: hours,   label: pluralize(hours,   'час',    'часа',   'часов')   },
+    { id: 'minutes', value: minutes, label: pluralize(minutes, 'минута', 'минуты', 'минут')   },
+    { id: 'seconds', value: seconds, label: pluralize(seconds, 'секунда','секунды','секунд')  },
   ]
 
   return (
@@ -72,8 +75,8 @@ export function WeddingCountdownSection() {
           </FadeUp>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10">
-            {units.map(({ value, label }, i) => (
-              <FadeUp key={label} delay={i * 80}>
+            {units.map(({ id, value, label }, i) => (
+              <FadeUp key={id} delay={i * 80}>
                 <div className="border border-white/20 p-6 md:p-8 text-center">
                   <div className="text-5xl md:text-7xl font-bold tabular-nums text-white leading-none">
                     {ready ? pad(value) : '--'}
@@ -90,7 +93,7 @@ export function WeddingCountdownSection() {
         <FadeUp delay={320}>
           <p className="text-white/60 text-sm">
             Уже организовано{' '}
-            <span className="font-bold text-white">{WEDDING_CONFIG.totalWeddings}+</span>{' '}
+            <span className="font-bold text-white">{totalWeddings}+</span>{' '}
             свадеб
           </p>
         </FadeUp>
