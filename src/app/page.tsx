@@ -18,12 +18,12 @@ export const revalidate = 3600
 
 export default async function HomePage() {
   const [settings, team, reviews, portfolio, faq, packages] = await Promise.all([
-    api.getSettings().catch((): SiteSettings => ({})),
-    api.getTeam().catch((): TeamMember[] => []),
-    api.getReviews().catch((): Review[] => []),
-    api.getPortfolio().catch((): PortfolioCase[] => []),
-    api.getFaq().catch((): FaqItem[] => []),
-    api.getPackages().catch((): Package[] => []),
+    api.getSettings({ next: { revalidate: 3600 } }).catch((): SiteSettings => ({})),
+    api.getTeam({ next: { revalidate: 3600 } }).catch((): TeamMember[] => []),
+    api.getReviews({ next: { revalidate: 3600 } }).catch((): Review[] => []),
+    api.getPortfolio({ next: { revalidate: 3600 } }).catch((): PortfolioCase[] => []),
+    api.getFaq({ next: { revalidate: 3600 } }).catch((): FaqItem[] => []),
+    api.getPackages({ next: { revalidate: 3600 } }).catch((): Package[] => []),
   ])
 
   return (
@@ -40,7 +40,7 @@ export default async function HomePage() {
         <PackagesSection packages={packages} />
         <ContactsSection settings={settings} />
       </main>
-      <Footer settings={settings} />
+      <Footer />
     </>
   )
 }

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Container, SocialIcon, AnchorLink } from '@/components/ui'
-import type { SiteSettings } from '@/lib/api'
+import { api } from '@/lib/api'
 
 const CURRENT_YEAR = new Date().getFullYear()
 
@@ -11,11 +11,8 @@ const NAV_LINKS = [
   { label: 'Контакты', href: '/#contacts' },
 ]
 
-interface Props {
-  settings: SiteSettings
-}
-
-export function Footer({ settings }: Props) {
+export async function Footer() {
+  const settings = await api.getSettings({ next: { revalidate: 3600 } }).catch(() => ({}))
   const phone = settings.phone ?? '+7 (000) 000-00-00'
   const instagramUrl = settings.instagram_url ?? '#'
   const telegramUrl = settings.telegram_url ?? '#'
