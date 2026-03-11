@@ -12,7 +12,7 @@ const NAV_LINKS = [
 ]
 
 export async function Footer() {
-  const settings = await api.getSettings({ next: { revalidate: 3600 } }).catch(() => null)
+  const settings = await api.getSettings({ next: { revalidate: 60 } }).catch(() => null)
   const phone = settings?.phone ?? '+7 (000) 000-00-00'
   const instagramUrl = settings?.instagram_url ?? '#'
   const telegramUrl = settings?.telegram_url ?? '#'

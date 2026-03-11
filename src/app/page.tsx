@@ -14,16 +14,16 @@ import { api } from '@/lib/api'
 import type { SiteSettings, TeamMember, Review, PortfolioCase, FaqItem, Package } from '@/lib/api'
 
 // Все данные ревалидируются раз в час
-export const revalidate = 3600
+export const revalidate = 60
 
 export default async function HomePage() {
   const [settings, team, reviews, portfolio, faq, packages] = await Promise.all([
-    api.getSettings({ next: { revalidate: 3600 } }).catch((): SiteSettings => ({})),
-    api.getTeam({ next: { revalidate: 3600 } }).catch((): TeamMember[] => []),
-    api.getReviews({ next: { revalidate: 3600 } }).catch((): Review[] => []),
-    api.getPortfolio({ next: { revalidate: 3600 } }).catch((): PortfolioCase[] => []),
-    api.getFaq({ next: { revalidate: 3600 } }).catch((): FaqItem[] => []),
-    api.getPackages({ next: { revalidate: 3600 } }).catch((): Package[] => []),
+    api.getSettings({ next: { revalidate: 60 } }).catch((): SiteSettings => ({})),
+    api.getTeam({ next: { revalidate: 60 } }).catch((): TeamMember[] => []),
+    api.getReviews({ next: { revalidate: 60 } }).catch((): Review[] => []),
+    api.getPortfolio({ next: { revalidate: 60 } }).catch((): PortfolioCase[] => []),
+    api.getFaq({ next: { revalidate: 60 } }).catch((): FaqItem[] => []),
+    api.getPackages({ next: { revalidate: 60 } }).catch((): Package[] => []),
   ])
 
   return (
