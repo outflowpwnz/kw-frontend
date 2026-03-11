@@ -26,10 +26,7 @@ export type {
 
 // SSR (сервер): API_URL_INTERNAL — прямой доступ к бэку внутри Docker-сети
 // Client (браузер): NEXT_PUBLIC_API_URL — публичный адрес через nginx
-const API_URL =
-  (typeof window === 'undefined' ? process.env.API_URL_INTERNAL : undefined) ??
-  process.env.NEXT_PUBLIC_API_URL ??
-  'http://localhost:4000/api/v1'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? '/api/v1'
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_URL}${path}`, options)
