@@ -26,7 +26,7 @@ export function AboutSection({ team }: Props) {
               <div className="flex flex-col">
                 <div className="relative aspect-[3/4] mb-4 overflow-hidden">
                   <Image
-                    src={resolveMediaUrl(member.photoUrl)}
+                    src={member.photoUrl}
                     alt={member.name}
                     fill
                     className="object-cover object-top"

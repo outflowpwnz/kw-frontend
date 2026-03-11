@@ -48,7 +48,7 @@ export function PortfolioSection({ cases }: Props) {
               aria-label={c.title}
             >
               <Image
-                src={resolveMediaUrl(c.photoUrl)}
+                src={c.photoUrl}
                 alt={c.title}
                 fill
                 className="object-cover"
@@ -69,7 +69,7 @@ export function PortfolioSection({ cases }: Props) {
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
               key={current.id}
-              src={resolveMediaUrl(current.photoUrl)}
+              src={current.photoUrl}
               alt={current.title}
               fill
               className="object-cover"
